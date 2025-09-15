@@ -13,7 +13,7 @@
                 <a href="https://stickron.com/about" target="_blank" class="menu-link px-2">Hakkımızda</a>
             </li>
             <li class="menu-item">
-                <a href="https://stickron.com/contact" class="menu-link px-2">Bize Ulaşın</a>
+                <a href="https://stickron.com/contact" target="_blank" class="menu-link px-2">Bize Ulaşın</a>
             </li>
         </ul>
         <!--end::Menu-->
