@@ -34,9 +34,29 @@
                         @csrf
                         @method('POST')
                         <div class="row">
+                            <div class="col-6">
+                                <label for="input-facebook_address" class="required form-label">Facebook Adresi</label>
+                                <input type="text" name="input-facebook_address" id="input-facebook_address" class="form-control @error('input-facebook_address') is-invalid error-input @enderror" placeholder="Facebook Adresi Giriniz" maxlength="50" value="{{ old('input-facebook_address', \Illuminate\Support\Facades\Auth::user()->linkedClient->facebook_address) }}"/>
+                                @if ($errors->has('input-facebook_address'))
+                                    <div class="invalid-feedback">
+                                        @ {{ $errors->first('input-facebook_address') }}
+                                    </div>
+                                @endif
+                            </div>
+                            <div class="col-6">
+                                <label for="input-instagram_address" class="required form-label">Instagram Adresi</label>
+                                <input type="text" name="input-instagram_address" id="input-instagram_address" class="form-control @error('input-instagram_address') is-invalid error-input @enderror" placeholder="Instagram Adresi Giriniz" maxlength="50" value="{{ old('input-instagram_address', \Illuminate\Support\Facades\Auth::user()->linkedClient->instagram_address) }}"/>
+                                @if ($errors->has('input-instagram_address'))
+                                    <div class="invalid-feedback">
+                                        @ {{ $errors->first('input-instagram_address') }}
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="row mt-6">
                             <div class="col-12">
-                                <p class="required form-label">@ Dijital Menü QR Kodu</p>
-                                <div class="symbol mt-4">
+                                <p class="form-label">@ Dijital Menü QR Kodu</p>
+                                <div class="symbol mt-2">
                                     @php
                                         $qrUrl = asset('uploads/qrcodes/'.\Illuminate\Support\Facades\Auth::user()->linkedClient->id.'.svg') . '?v=' . optional(\Illuminate\Support\Facades\Auth::user()->linkedClient->updated_at)->timestamp;
                                     @endphp
@@ -45,6 +65,14 @@
                                          style="width:192px;height:192px;background:url('{{ $qrUrl }}') center/contain no-repeat;">
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="row mt-6">
+                            <div class="col-12">
+                                <p class="form-label">@ Dijital Menü Web Adresi</p>
+                                <a href="{{ url('').'/menu/'.\Illuminate\Support\Facades\Auth::user()->linkedClient->qr_menu_content }}" target="_blank">
+                                    {{ url('').'/menu/'.\Illuminate\Support\Facades\Auth::user()->linkedClient->qr_menu_content }}
+                                </a>
                             </div>
                         </div>
                     </form>

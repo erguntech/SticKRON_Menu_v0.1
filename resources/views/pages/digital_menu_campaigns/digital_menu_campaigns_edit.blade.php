@@ -54,12 +54,33 @@
                             </div>
                         </div>
                         <div class="row mt-6">
-                            <div class="col-12">
-                                <label for="input-campaign_price" class="required form-label">Kampamya Fiyatı</label>
-                                <input type="text" name="input-campaign_price" id="input-campaign_price" class="form-control @error('input-campaign_price') is-invalid error-input @enderror" placeholder="Kampamya Fiyatı Giriniz" maxlength="50" value="{{ old('input-campaign_price', $digitalMenuCampaign->campaign_price) }}"/>
-                                @if ($errors->has('input-campaign_price'))
+                            <div class="col-6">
+                                <label for="input-campaign_standard_price" class="required form-label">Kampamya Normal Fiyatı</label>
+                                <input type="text" name="input-campaign_standard_price" id="input-campaign_standard_price" class="form-control @error('input-campaign_standard_price') is-invalid error-input @enderror" placeholder="Kampamya Normal Fiyatı Giriniz" maxlength="50" value="{{ old('input-campaign_standard_price', $digitalMenuCampaign->campaign_standard_price) }}"/>                                @if ($errors->has('input-campaign_standard_price'))
                                     <div class="invalid-feedback">
-                                        @ {{ $errors->first('input-campaign_price') }}
+                                        @ {{ $errors->first('input-campaign_standard_price') }}
+                                    </div>
+                                @endif
+                            </div>
+                            <div class="col-6">
+                                <label for="input-campaign_discounted_price" class="required form-label">Kampamya İndirimli Fiyatı</label>
+                                <input type="text" name="input-campaign_discounted_price" id="input-campaign_discounted_price" class="form-control @error('input-campaign_discounted_price') is-invalid error-input @enderror" placeholder="Kampamya İndirimli Fiyatı Giriniz" maxlength="50" value="{{ old('input-campaign_discounted_price', $digitalMenuCampaign->campaign_discounted_price) }}"/>
+                                @if ($errors->has('input-campaign_discounted_price'))
+                                    <div class="invalid-feedback">
+                                        @ {{ $errors->first('input-campaign_discounted_price') }}
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="row mt-6">
+                            <div class="col-12">
+                                <label for="input-campaign_main_image" class="required form-label">Kampanya Manşet Resmi</label> <a class="text-primary" data-fslightbox="lightbox-basic" href="{{ Storage::url("uploads/campaigns/".$digitalMenuCampaign->linked_client_id."/".$digitalMenuCampaign->id."/".$digitalMenuCampaign->id.".jpg") }}">(Mevcut Görsel Önizleme)</a>
+                                <input type="file" name="input-campaign_main_image" id="input-campaign_main_image" class="form-control @error('input-campaign_main_image') is-invalid error-input @enderror"/>
+
+                                @if ($errors->has('input-campaign_main_image'))
+                                    <div class="invalid-feedback">
+                                        @ {{ $errors->first('input-campaign_main_image') }}
                                     </div>
                                 @endif
                             </div>

@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSettingsRequest;
+use App\Models\Client;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Support\Facades\Auth;
 
 class StoreSettingsController extends Controller implements HasMiddleware
 {
@@ -21,8 +24,12 @@ class StoreSettingsController extends Controller implements HasMiddleware
         return view('pages.store_settings.store_settings_index');
     }
 
-    public function update(StoreSettingsRequest $request)
+    public function update(Request $request)
     {
+        $client = Client::find(Auth::user()->linkedClient->id);
+        $client->facebook_address = $request['input-facebook_address'];
+        $client->instagram_address = $request['input-instagram_address'];
+        $client->save();
 
         return redirect()->route('Settings.Store.Index')
             ->with('result','warning')

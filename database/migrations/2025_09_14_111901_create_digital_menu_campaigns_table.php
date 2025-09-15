@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('campaign_name');
             $table->text('campaign_description')->nullable();
-            $table->text('campaign_price');
+            $table->text('campaign_standard_price');
+            $table->text('campaign_discounted_price');
             $table->integer('linked_client_id')->nullable();
             $table->integer('order')->default(0);
             $table->boolean('is_active')->default(true);

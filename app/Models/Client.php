@@ -18,6 +18,8 @@ class Client extends Model
         'company_phone',
         'qr_menu_content',
         'qr_menu_code',
+        'facebook_address',
+        'instagram_address',
         'is_active',
     ];
 

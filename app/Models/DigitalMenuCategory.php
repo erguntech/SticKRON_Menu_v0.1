@@ -24,8 +24,8 @@ class DigitalMenuCategory extends Model
         return $this->belongsTo(Client::class, 'linked_client_id', 'id')->withTrashed();
     }
 
-    public function linkedDigitalMenuCategory()
+    public function contents()
     {
-        return $this->belongsTo(DigitalMenuCategory::class, 'linked_digital_menu_category_id', 'id')->withTrashed();
+        return $this->hasMany(DigitalMenuContent::class, 'linked_digital_menu_category_id', 'id');
     }
 }

@@ -15,6 +15,8 @@ return new class extends Migration
             $table->text('company_address');
             $table->text('company_phone');
             $table->text('qr_menu_content');
+            $table->text('facebook_address')->nullable();
+            $table->text('instagram_address')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
             $table->softDeletes();

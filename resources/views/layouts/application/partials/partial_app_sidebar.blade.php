@@ -132,7 +132,7 @@
     </div>
     @if(Auth()->user()->can('Dijital Menü Ayarlarını Kullanım İzni'))
         <div class="app-sidebar-footer flex-column-auto pt-2 pb-6 px-6" id="kt_app_sidebar_footer">
-            <a href="{{ Settings::get('app_domain') }}" class="btn btn-flex flex-center btn-success overflow-hidden text-nowrap px-0 h-40px w-100" target="_blank">
+            <a href="{{ url('').'/menu/'.\Illuminate\Support\Facades\Auth::user()->linkedClient->qr_menu_content }}" class="btn btn-flex flex-center btn-success overflow-hidden text-nowrap px-0 h-40px w-100" target="_blank">
                 <span class="btn-label">Dijital Menü Görüntüle</span>
             </a>
         </div>

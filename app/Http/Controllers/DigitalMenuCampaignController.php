@@ -9,6 +9,9 @@ use App\Models\DigitalMenuCategory;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Encoders\JpegEncoder;
+use Intervention\Image\Laravel\Facades\Image;
 use Yajra\DataTables\DataTables;
 
 class DigitalMenuCampaignController extends Controller
@@ -32,13 +35,16 @@ class DigitalMenuCampaignController extends Controller
                 ->addColumn('campaignDescription', function ($row_campaign_description) {
                     return $row_campaign_description->campaign_description;
                 })
-                ->addColumn('campaignPrice', function ($row_campaign_price) {
-                    return $row_campaign_price->campaign_price;
+                ->addColumn('campaignStandardPrice', function ($row_campaign_price) {
+                    return $row_campaign_price->campaign_standard_price;
+                })
+                ->addColumn('campaignDiscountedPrice', function ($row_campaign_old_price) {
+                    return $row_campaign_old_price->campaign_discounted_price;
                 })
                 ->addColumn('campaignStatus', function ($row_standStatus) {
                     return ($row_standStatus->is_active) ? '<span class="badge rounded-pill badge-light-success">Aktif</span>' : '<span class="badge rounded-pill badge-light-danger">Pasif</span>';
                 })
-                ->rawColumns(['campaignName', 'campaignDescription', 'campaignPrice', 'campaignStatus'])
+                ->rawColumns(['campaignName', 'campaignDescription', 'campaignStandardPrice', 'campaignDiscountedPrice', 'campaignStatus'])
                 ->make(true);
         }
 
@@ -78,10 +84,31 @@ class DigitalMenuCampaignController extends Controller
         $digitalMenuCampaign = new DigitalMenuCampaign();
         $digitalMenuCampaign->campaign_name = $request['input-campaign_name'];
         $digitalMenuCampaign->campaign_description = $request['input-campaign_description'];
-        $digitalMenuCampaign->campaign_price = $request['input-campaign_price'];
+        $digitalMenuCampaign->campaign_standard_price = $request['input-campaign_standard_price'];
+        $digitalMenuCampaign->campaign_discounted_price = $request['input-campaign_discounted_price'];
         $digitalMenuCampaign->linked_client_id = Auth::user()->linkedClient->id;
         $digitalMenuCampaign->is_active = $request['input-is_active'];
         $digitalMenuCampaign->save();
+
+        if ($request->hasFile('input-campaign_main_image')) {
+            $campaignImage = $request->file('input-campaign_main_image');
+            $campaignImageData = Image::read($campaignImage);
+
+            $imageWidth = 400;
+            $imageHeight = 300;
+            $campaignImageData->scale(height: $imageHeight);
+            $campaignImageData->crop($imageWidth, $imageHeight);
+
+            $campaignImagePath = 'uploads/campaigns/'.Auth::user()->linkedClient->id.'/'.$digitalMenuCampaign->id;
+
+            if (!Storage::disk('public')->exists($campaignImagePath)) {
+                Storage::disk('public')->makeDirectory($campaignImagePath);
+            }
+
+            $campaignImageFileName = $digitalMenuCampaign->id.'.jpg';
+            $campaignImageStoragePath = $campaignImagePath. '/'.$campaignImageFileName;
+            Storage::disk('public')->put($campaignImageStoragePath, $campaignImageData->encode(new JpegEncoder(quality: 100)));
+        }
 
         return redirect()->route('DigitalMenuCampaigns.Index')
             ->with('result','success')
@@ -100,10 +127,31 @@ class DigitalMenuCampaignController extends Controller
         $digitalMenuCampaign = DigitalMenuCampaign::find($id);
         $digitalMenuCampaign->campaign_name = $request['input-campaign_name'];
         $digitalMenuCampaign->campaign_description = $request['input-campaign_description'];
-        $digitalMenuCampaign->campaign_price = $request['input-campaign_price'];
+        $digitalMenuCampaign->campaign_standard_price = $request['input-campaign_standard_price'];
+        $digitalMenuCampaign->campaign_discounted_price = $request['input-campaign_discounted_price'];
         $digitalMenuCampaign->linked_client_id = Auth::user()->linkedClient->id;
         $digitalMenuCampaign->is_active = $request['input-is_active'];
         $digitalMenuCampaign->save();
+
+        if ($request->hasFile('input-campaign_main_image')) {
+            $campaignImage = $request->file('input-campaign_main_image');
+            $campaignImageData = Image::read($campaignImage);
+
+            $imageWidth = 400;
+            $imageHeight = 300;
+            $campaignImageData->scale(height: $imageHeight);
+            $campaignImageData->crop($imageWidth, $imageHeight);
+
+            $campaignImagePath = 'uploads/campaigns/'.Auth::user()->linkedClient->id.'/'.$digitalMenuCampaign->id;
+
+            if (!Storage::disk('public')->exists($campaignImagePath)) {
+                Storage::disk('public')->makeDirectory($campaignImagePath);
+            }
+
+            $campaignImageFileName = $digitalMenuCampaign->id.'.jpg';
+            $campaignImageStoragePath = $campaignImagePath. '/'.$campaignImageFileName;
+            Storage::disk('public')->put($campaignImageStoragePath, $campaignImageData->encode(new JpegEncoder(quality: 100)));
+        }
 
         return redirect()->route('DigitalMenuCampaigns.Edit', $id)
             ->with('result','warning')

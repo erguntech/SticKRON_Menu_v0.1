@@ -55,7 +55,8 @@
                                 <th style="width: 5%;">No</th>
                                 <th>Kampanya Adı</th>
                                 <th>Kampanya Açıklaması</th>
-                                <th>Kampanya Fiyatı</th>
+                                <th>Kampanya Normal Fiyatı</th>
+                                <th>Kampanya İndirimli Fiyatı</th>
                                 <th>Durumu</th>
                                 <th class="text-center">İşlemler</th>
                             </tr>
@@ -117,7 +118,8 @@
                     { data: 'id' },
                     { data: 'campaignName' },
                     { data: 'campaignDescription' },
-                    { data: 'campaignPrice' },
+                    { data: 'campaignStandardPrice' },
+                    { data: 'campaignDiscountedPrice' },
                     { data: 'campaignStatus' },
                     { data: null },
                 ],

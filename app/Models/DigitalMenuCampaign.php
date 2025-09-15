@@ -15,6 +15,7 @@ class DigitalMenuCampaign extends Model
         'campaign_name',
         'campaign_description',
         'campaign_price',
+        'campaign_old_price',
         'linked_client_id',
         'order',
         'is_active',

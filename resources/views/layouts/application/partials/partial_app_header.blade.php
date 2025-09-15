@@ -58,7 +58,7 @@
                         @if(Auth()->user()->can('Dijital Menü Ayarlarını Kullanım İzni'))
                         <!--begin::Menu item-->
                         <div class="menu-item px-5">
-                            <a href="{{ Settings::get('app_domain') }}" class="menu-link px-5" target="_blank"><span class="bullet bg-primary me-2"></span>Dijital Menü'yü Görüntüle</a>
+                            <a href="{{ url('').'/menu/'.\Illuminate\Support\Facades\Auth::user()->linkedClient->qr_menu_content }}" class="menu-link px-5" target="_blank"><span class="bullet bg-primary me-2"></span>Dijital Menü'yü Görüntüle</a>
                         </div>
                         <!--end::Menu item-->
                         @endif
