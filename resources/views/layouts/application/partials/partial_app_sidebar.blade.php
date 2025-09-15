@@ -28,7 +28,7 @@
 
                     @if(Auth()->user()->can('Müşteri Yönetimi Kullanım İzni'))
                     <div class="menu-item">
-                        <a class="menu-link {{ (request()->is('clients', 'clients/create', 'clients/*/edit')) ? 'active' : '' }}" href="{{ route('Clients.Index') }}">
+                        <a class="menu-link {{ (request()->is('clients', 'clients/*', 'clients/create', 'clients/*/edit')) ? 'active' : '' }}" href="{{ route('Clients.Index') }}">
                             <span class="menu-icon">
                                 <i class="ki-solid ki-profile-user fs-2"></i>
                             </span>
@@ -108,15 +108,6 @@
                             </div>
                         </div>
                     @endif
-
-                    <div class="menu-item">
-                        <a class="menu-link {{ (request()->is('contact')) ? 'active' : '' }}" href="{{ route('Contact.Index') }}">
-                            <span class="menu-icon">
-                                <i class="ki-solid ki-satellite fs-2"></i>
-                            </span>
-                            <span class="menu-title">Bize Ulaşın</span>
-                        </a>
-                    </div>
 
                     <div class="menu-item">
                         <a class="menu-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

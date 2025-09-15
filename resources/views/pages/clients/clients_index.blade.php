@@ -79,6 +79,7 @@
     <script>
         var table, dt;
         var editUrl = '{{ route("Clients.Edit", ":id") }}';
+        var showUrl = '{{ route("Clients.Show", ":id") }}';
 
         DataTable.type('num', 'detect', () => false);
         DataTable.type('num-fmt', 'detect', () => false);
@@ -130,7 +131,8 @@
                         orderable: false,
                         className: 'text-center',
                         render: function (data, type, row) {
-                            return `<a class="btn btn-icon btn-light-warning" href="`+ editUrl.replace(':id', row.id) +`" style="height: calc(2.05em);"><i class="fas fa-edit fs-5" style="margin-top: 1px;"></i></a>
+                            return `<a class="btn btn-icon btn-light-primary" href="`+ showUrl.replace(':id', row.id) +`" style="height: calc(2.05em);"><i class="fas fa-eye fs-5" style="margin-top: 1px;"></i></a>
+                            <a class="btn btn-icon btn-light-warning" href="`+ editUrl.replace(':id', row.id) +`" style="height: calc(2.05em);"><i class="fas fa-edit fs-5" style="margin-top: 1px;"></i></a>
                             <a class="btn btn-icon btn-light-danger" onclick="deleteData(this)" data-id="`+ row.id +`" style="height: calc(2.05em);"><i class="fas fa-trash-alt fs-5" style="margin-top: 2px;"></i></a>
                             `;
                         },

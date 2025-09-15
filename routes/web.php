@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\StatusController;
-use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\SystemSettingsController;
 use App\Http\Controllers\StoreSettingsController;
 use App\Http\Controllers\MaintenanceModeController;
@@ -31,14 +30,9 @@ Route::group(['middleware' => ['maintenance_mode']], function () {
             Route::get('/', [DashboardController::class, 'index'])->name('Dashboards.Index');
             // DashboardController End
 
-            // ContactUsController Start
-            Route::get('/contact', [ContactUsController::class, 'index'])->name('Contact.Index');
-            Route::post('/contact', [ContactUsController::class, 'sendMessage'])->name('Contact.SendMessage');
-            // ContactUsController End
-
             // ClientController Start
             Route::resource('clients', ClientController::class, [
-                'names' => ['index' => 'Clients.Index', 'create' => 'Clients.Create', 'store' => 'Clients.Store', 'edit' => 'Clients.Edit', 'update' => 'Clients.Update', 'destroy' => 'Clients.Destroy']
+                'names' => ['index' => 'Clients.Index', 'show' => 'Clients.Show', 'create' => 'Clients.Create', 'store' => 'Clients.Store', 'edit' => 'Clients.Edit', 'update' => 'Clients.Update', 'destroy' => 'Clients.Destroy']
             ]);
             // ClientController End
 

@@ -10,10 +10,10 @@
         <!--begin::Menu-->
         <ul class="menu menu-gray-600 menu-hover-primary fw-semibold order-1">
             <li class="menu-item">
-                <a href="{{ Settings::get('app_contact_domain') }}" target="_blank" class="menu-link px-2">Hakkımızda</a>
+                <a href="https://stickron.com/about" target="_blank" class="menu-link px-2">Hakkımızda</a>
             </li>
             <li class="menu-item">
-                <a href="{{ route('Contact.Index') }}" class="menu-link px-2">Bize Ulaşın</a>
+                <a href="https://stickron.com/contact" class="menu-link px-2">Bize Ulaşın</a>
             </li>
         </ul>
         <!--end::Menu-->

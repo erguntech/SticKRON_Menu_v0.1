@@ -50,6 +50,14 @@ class ClientController extends Controller implements HasMiddleware
         return view('pages.clients.clients_index');
     }
 
+    public function show(string $id)
+    {
+        $client = Client::find($id);
+        $user = User::find($client->user_id);
+
+        return view('pages.clients.clients_show', compact('client', 'user'));
+    }
+
     public function create()
     {
         return view('pages.clients.clients_create');

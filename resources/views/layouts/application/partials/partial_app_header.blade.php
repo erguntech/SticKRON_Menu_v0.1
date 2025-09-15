@@ -75,12 +75,6 @@
 
                         <!--begin::Menu item-->
                         <div class="menu-item px-5">
-                            <a href="{{ route('Contact.Index') }}" class="menu-link px-5"><span class="bullet bg-primary me-2"></span> Bize Ulaşın</a>
-                        </div>
-                        <!--end::Menu item-->
-
-                        <!--begin::Menu item-->
-                        <div class="menu-item px-5">
                             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="menu-link px-5"><span class="bullet bg-primary me-2"></span> Güvenli Çıkış</a>
                         </div>
                         <!--end::Menu item-->
