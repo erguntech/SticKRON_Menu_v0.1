@@ -1,0 +1,32 @@
+.menu-item .menu-link {
+    padding: 0.3rem 1rem !important;
+}
+
+.dt-settings{ width: 150px; white-space: nowrap; }
+
+body.swal2-shown > [aria-hidden='true'] {
+    transition: 0.1s filter;
+    filter: blur(3px);
+}
+
+.select2-container--bootstrap5 .select2-selection--multiple:not(.form-select-sm):not(.form-select-lg) .select2-selection__choice .select2-selection__choice__display {
+    margin-left: 1.1rem;
+    font-size: 0.95rem;
+}
+
+div.dt-container {
+    white-space: nowrap;
+}
+
+table.dataTable tbody td {
+    vertical-align: middle;
+}
+
+.table-responsive{
+    scrollbar-width: thin;
+    scrollbar-color: var(--bs-scrollbar-color) transparent;
+}
+
+.dt-toolbar{
+    margin-top : 15px !important;
+}
