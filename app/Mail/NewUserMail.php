@@ -22,7 +22,7 @@ class NewUserMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: __('Relicwise Admin Center'),
+            subject: __('SticKRON Digital Menu - Yeni Kullanıcı'),
         );
     }
 

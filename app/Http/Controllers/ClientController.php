@@ -75,7 +75,7 @@ class ClientController extends Controller implements HasMiddleware
         $user->first_name = $request['input-first_name'];
         $user->last_name = $request['input-last_name'];
         $user->email = $request['input-email'];
-        $user->password = bcrypt(10775);
+        $user->password = bcrypt($password);
         $user->user_type = 2; // Clients
         $user->is_active = $request['input-is_active'];
         $user->email_verified_at = now();
@@ -95,7 +95,7 @@ class ClientController extends Controller implements HasMiddleware
         $user->assignRole("İşletme Yöneticisi");
 
         Mail::to($user->email)->send(new NewUserMail([
-            'user_name' => Auth::user()->getUserFullName(),
+            'user_name' => $user->getUserFullName(),
             'email' => $user->email,
             'password' => $password
         ]));

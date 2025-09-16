@@ -4,7 +4,7 @@
             <img alt="Logo" src="{{ asset('assets/media/logos/default-dark.svg') }}" class="h-55px app-sidebar-logo-default" />
             <img alt="Logo" src="{{ asset('assets/media/logos/default-small.svg') }}" class="h-20px app-sidebar-logo-minimize" />
         </a>
-      
+
     </div>
 
     <div class="app-sidebar-menu overflow-hidden flex-column-fluid">

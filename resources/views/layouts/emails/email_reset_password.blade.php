@@ -50,12 +50,13 @@
         <img alt="Logo" src="{{ asset('assets/media/logos/login_logo_dark-01.svg') }}" style="height: 100px; margin-bottom: 10px;"/>
     </div>
     <div class="message">
-        <p><strong>Sn. {{ $name }}</strong> Relicwise Admin Center'a Hoşgeldiniz!</p>
+        <p><strong>Sn. {{ $name }}</strong> SticKRON Digital Menu'ye Hoşgeldiniz!</p>
+
         <p>Aşağıda bağlantı üzerinden yeni şifrenizi belirleyebilirsiniz.</p>
         <a class="btn btn-sm btn-primary" href="{{ $url }}">
             Şifre Sıfırlama
         </a>
-        <p>Relicwise ailesi olarak iyi günler dileriz.</p>
+        <p>Stickron ailesi olarak iyi günler dileriz.</p>
     </div>
 </div>
 </body>

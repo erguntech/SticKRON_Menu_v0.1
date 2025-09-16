@@ -19,6 +19,7 @@ class DigitalMenuCampaignRequest extends FormRequest
                     'input-campaign_name' => 'required|min:2|max:500',
                     'input-campaign_standard_price' => 'required|min:2|max:500',
                     'input-campaign_discounted_price' => 'required|min:2|max:500',
+                    'input-campaign_main_image' => 'required|image|mimes:jpg,jpeg,png|max:5120',
                     'input-is_active' => 'required',
                 ];
             case "PUT":
@@ -26,6 +27,7 @@ class DigitalMenuCampaignRequest extends FormRequest
                     'input-campaign_name' => 'required|min:2|max:500',
                     'input-campaign_standard_price' => 'required|min:2|max:500',
                     'input-campaign_discounted_price' => 'required|min:2|max:500',
+                    'input-campaign_main_image' => 'required|image|mimes:jpg,jpeg,png|max:5120',
                     'input-is_active' => 'required'
                 ];
             default:
@@ -40,6 +42,7 @@ class DigitalMenuCampaignRequest extends FormRequest
             'input-campaign_description' => 'Kampanya Açıklaması',
             'input-campaign_standard_price' => 'Kampanya Normal Fiyatı',
             'input-campaign_discounted_price' => 'Kampanya İndirimli Fiyatı',
+            'input-campaign_main_image' => 'Kampanya Manşet Resmi',
             'input-is_active' => 'Durumu',
         ];
     }

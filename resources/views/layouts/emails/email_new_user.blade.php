@@ -50,12 +50,12 @@
         <img alt="Logo" src="{{ asset('assets/media/logos/login_logo_dark-01.svg') }}" style="height: 100px; margin-bottom: 10px;"/>
     </div>
     <div class="message">
-        <p><strong>Sn. {{ $emailData['user_name'] }}</strong> Relicwise Admin Center'a Hoşgeldiniz!</p>
+        <p><strong>Sn. {{ $emailData['user_name'] }}</strong> SticKRON Digital Menu'ye Hoşgeldiniz!</p>
         <p>Aşağıda yer alan bilgileri kullanarak sisteme giriş yapabilirsiniz</p>
         <p><strong>Kullanıcı Adı:</strong> {{ $emailData['email'] }}</p>
         <p><strong>Şifre:</strong> {{ $emailData['password'] }}</p>
         <p><strong>Admin Panel Bağlantısı: {{ Settings::get('app_domain') }}</strong></p>
-        <p>Relicwise ailesi olarak iyi günler dileriz.</p>
+        <p>Stickron ailesi olarak iyi günler dileriz.</p>
     </div>
 </div>
 </body>
