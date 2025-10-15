@@ -129,7 +129,7 @@
 
                                                     @foreach($chunk as $content)
                                                         <li class="last-paragraph-no-margin d-flex">
-                                                            <img src="{{ Storage::url("uploads/products/{$content->linked_client_id}/{$content->id}/{$content->id}.jpg") }}"
+                                                            <img src="{{ asset(Storage::url("uploads/products/{$content->linked_client_id}/{$content->id}/{$content->id}.jpg")) }}"
                                                                  class="rounded-circle" alt="" width="105" height="105">
                                                             <div class="ms-30px xs-ms-0 flex-grow-1">
                                                                 <div class="d-flex align-items-center w-100 fs-18 mb-5px">
