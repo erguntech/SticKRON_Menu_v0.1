@@ -92,22 +92,28 @@ class DigitalMenuCampaignController extends Controller
 
         if ($request->hasFile('input-campaign_main_image')) {
             $campaignImage = $request->file('input-campaign_main_image');
-            $campaignImageData = Image::read($campaignImage);
 
-            $imageWidth = 400;
-            $imageHeight = 300;
-            $campaignImageData->scale(height: $imageHeight);
-            $campaignImageData->crop($imageWidth, $imageHeight);
+            // Görseli oku ve EXIF yönlendirmesine göre döndür
+            $campaignImageData = Image::read($campaignImage)->orient();
 
-            $campaignImagePath = 'uploads/campaigns/'.Auth::user()->linkedClient->id.'/'.$digitalMenuCampaign->id;
+            // 400x300 olacak şekilde orantılı büyüt + merkezden kırp
+            $campaignImageData->cover(400, 300, position: 'center');
+
+            // Kayıt yolu
+            $campaignImagePath = 'uploads/campaigns/' . Auth::user()->linkedClient->id . '/' . $digitalMenuCampaign->id;
 
             if (!Storage::disk('public')->exists($campaignImagePath)) {
                 Storage::disk('public')->makeDirectory($campaignImagePath);
             }
 
-            $campaignImageFileName = $digitalMenuCampaign->id.'.jpg';
-            $campaignImageStoragePath = $campaignImagePath. '/'.$campaignImageFileName;
-            Storage::disk('public')->put($campaignImageStoragePath, $campaignImageData->encode(new JpegEncoder(quality: 100)));
+            $campaignImageFileName = $digitalMenuCampaign->id . '.jpg';
+            $campaignImageStoragePath = $campaignImagePath . '/' . $campaignImageFileName;
+
+            // Görseli kaydet
+            Storage::disk('public')->put(
+                $campaignImageStoragePath,
+                $campaignImageData->encode(new JpegEncoder(quality: 100))
+            );
         }
 
         return redirect()->route('DigitalMenuCampaigns.Index')
@@ -135,22 +141,27 @@ class DigitalMenuCampaignController extends Controller
 
         if ($request->hasFile('input-campaign_main_image')) {
             $campaignImage = $request->file('input-campaign_main_image');
-            $campaignImageData = Image::read($campaignImage);
 
-            $imageWidth = 400;
-            $imageHeight = 300;
-            $campaignImageData->scale(height: $imageHeight);
-            $campaignImageData->crop($imageWidth, $imageHeight);
+            // Görseli oku ve EXIF yönlendirmesine göre döndür
+            $campaignImageData = Image::read($campaignImage)->orient();
 
-            $campaignImagePath = 'uploads/campaigns/'.Auth::user()->linkedClient->id.'/'.$digitalMenuCampaign->id;
+            // 400x300 olacak şekilde orantılı büyüt + merkezden kırp
+            $campaignImageData->cover(400, 300, position: 'center');
+
+            // Kayıt yolu
+            $campaignImagePath = 'uploads/campaigns/' . Auth::user()->linkedClient->id . '/' . $digitalMenuCampaign->id;
 
             if (!Storage::disk('public')->exists($campaignImagePath)) {
                 Storage::disk('public')->makeDirectory($campaignImagePath);
             }
 
-            $campaignImageFileName = $digitalMenuCampaign->id.'.jpg';
-            $campaignImageStoragePath = $campaignImagePath. '/'.$campaignImageFileName;
-            Storage::disk('public')->put($campaignImageStoragePath, $campaignImageData->encode(new JpegEncoder(quality: 100)));
+            $campaignImageFileName = $digitalMenuCampaign->id . '.jpg';
+            $campaignImageStoragePath = $campaignImagePath . '/' . $campaignImageFileName;
+
+            Storage::disk('public')->put(
+                $campaignImageStoragePath,
+                $campaignImageData->encode(new JpegEncoder(quality: 100))
+            );
         }
 
         return redirect()->route('DigitalMenuCampaigns.Edit', $id)

@@ -90,23 +90,16 @@ class DigitalMenuContentController extends Controller
         $digitalMenuContent->save();
 
         if ($request->hasFile('input-product_main_image')) {
-            $productImage = $request->file('input-product_main_image');
-            $productImageData = Image::read($productImage);
+            $img = Image::read($request->file('input-product_main_image'))
+                ->orient()                          // EXIF’e göre doğru döndür
+                ->cover(500, 500, position: 'center');  // merkeze göre kırpıp 500x500 yap
 
-            $imageWidth = 500;
-            $imageHeight = 500;
-            $productImageData->scale(height: $imageHeight);
-            $productImageData->crop($imageWidth, $imageHeight);
-
-            $productImagePath = 'uploads/products/'.Auth::user()->linkedClient->id.'/'.$digitalMenuContent->id;
-
-            if (!Storage::disk('public')->exists($productImagePath)) {
-                Storage::disk('public')->makeDirectory($productImagePath);
-            }
-
-            $productImageFileName = $digitalMenuContent->id.'.jpg';
-            $productImageStoragePath = $productImagePath. '/'.$productImageFileName;
-            Storage::disk('public')->put($productImageStoragePath, $productImageData->encode(new JpegEncoder(quality: 100)));
+            $path = 'uploads/products/'.Auth::user()->linkedClient->id.'/'.$digitalMenuContent->id;
+            Storage::disk('public')->makeDirectory($path);
+            Storage::disk('public')->put(
+                $path.'/'.$digitalMenuContent->id.'.jpg',
+                $img->encode(new JpegEncoder(quality: 100))
+            );
         }
 
         return redirect()->route('DigitalMenuContents.Index')
@@ -134,23 +127,16 @@ class DigitalMenuContentController extends Controller
         $digitalMenuContent->save();
 
         if ($request->hasFile('input-product_main_image')) {
-            $productImage = $request->file('input-product_main_image');
-            $productImageData = Image::read($productImage);
+            $img = Image::read($request->file('input-product_main_image'))
+                ->orient()                          // EXIF’e göre doğru döndür
+                ->cover(500, 500, position: 'center');  // merkeze göre kırpıp 500x500 yap
 
-            $imageWidth = 500;
-            $imageHeight = 500;
-            $productImageData->scale(height: $imageHeight);
-            $productImageData->crop($imageWidth, $imageHeight);
-
-            $productImagePath = 'uploads/products/'.Auth::user()->linkedClient->id.'/'.$digitalMenuContent->id;
-
-            if (!Storage::disk('public')->exists($productImagePath)) {
-                Storage::disk('public')->makeDirectory($productImagePath);
-            }
-
-            $productImageFileName = $digitalMenuContent->id.'.jpg';
-            $productImageStoragePath = $productImagePath. '/'.$productImageFileName;
-            Storage::disk('public')->put($productImageStoragePath, $productImageData->encode(new JpegEncoder(quality: 100)));
+            $path = 'uploads/products/'.Auth::user()->linkedClient->id.'/'.$digitalMenuContent->id;
+            Storage::disk('public')->makeDirectory($path);
+            Storage::disk('public')->put(
+                $path.'/'.$digitalMenuContent->id.'.jpg',
+                $img->encode(new JpegEncoder(quality: 100))
+            );
         }
 
         return redirect()->route('DigitalMenuContents.Edit', $id)
