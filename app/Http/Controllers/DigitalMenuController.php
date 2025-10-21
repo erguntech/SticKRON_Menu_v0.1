@@ -34,7 +34,6 @@ class DigitalMenuController extends Controller
                     ->orderBy('content_name');
             }])
             ->orderBy('order')
-            ->orderBy('category_name')
             ->get();
         $clientCampaigns = DigitalMenuCampaign::where('linked_client_id', $client->id)->where('is_active', true)->get();
         return view('pages.digital_menu.digital_menu_index', compact('client', 'clientCategories', 'clientCampaigns'));

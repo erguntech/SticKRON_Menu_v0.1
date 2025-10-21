@@ -57,7 +57,7 @@
                                 @foreach($digitalMenuCampaigns as $digitalMenuCampaign)
                                     <div class="sort-item alert alert-{{ ($digitalMenuCampaign->is_active) ? 'primary' : 'warning' }} d-flex align-items-center p-3" data-id="{{ $digitalMenuCampaign->id }}">
                                         <span class="position-badge badge badge-{{ ($digitalMenuCampaign->is_active) ? 'primary' : 'warning' }} me-2">1</span>
-                                        Kampanya Adı: {{ $digitalMenuCampaign->campaign_name }}
+                                        {{ $digitalMenuCampaign->campaign_name }} | {{ $digitalMenuCampaign->campaign_description }}
                                         <i class="handle ki-solid ki-abstract-14 fs-3 text-warning" style="position: absolute; right: 10px;"></i>
                                     </div>
                                 @endforeach
