@@ -81,7 +81,7 @@
 
                         <div class="row mt-6">
                             <div class="col-12">
-                                <label for="input-product_main_image" class="required form-label">Ürün Manşet Resmi</label> <a class="text-primary" data-fslightbox="lightbox-basic" href="{{ Storage::url("uploads/products/".$digitalMenuContent->linked_client_id."/".$digitalMenuContent->id."/".$digitalMenuContent->id.".jpg") }}">(Mevcut Görsel Önizleme)</a>
+                                <label for="input-product_main_image" class="form-label">Ürün Manşet Resmi</label> <a class="text-primary" data-fslightbox="lightbox-basic" href="{{ Storage::url("uploads/products/".$digitalMenuContent->linked_client_id."/".$digitalMenuContent->id."/".$digitalMenuContent->id.".jpg") }}">(Mevcut Görsel Önizleme)</a>
                                 <input type="file" name="input-product_main_image" id="input-product_main_image" class="form-control @error('input-product_main_image') is-invalid error-input @enderror"/>
 
                                 @if ($errors->has('input-product_main_image'))

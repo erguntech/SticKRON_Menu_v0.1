@@ -19,7 +19,7 @@ class DigitalMenuContentRequest extends FormRequest
                     'input-content_name' => 'required|min:2|max:500',
                     'input-content_price' => 'required|min:2|max:500',
                     'input-digital_menu_category_id' => 'required',
-                    'input-product_main_image' => 'required|image|mimes:jpg,jpeg,png|max:5120',
+                    'input-product_main_image' => 'nullable|image|mimes:jpg,jpeg,png|max:5120',
                     'input-is_active' => 'required',
                 ];
             case "PUT":
@@ -27,7 +27,7 @@ class DigitalMenuContentRequest extends FormRequest
                     'input-content_name' => 'required|min:2|max:500',
                     'input-content_price' => 'required|min:2|max:500',
                     'input-digital_menu_category_id' => 'required',
-                    'input-product_main_image' => 'required|image|mimes:jpg,jpeg,png|max:5120',
+                    'input-product_main_image' => 'nullable|image|mimes:jpg,jpeg,png|max:5120',
                     'input-is_active' => 'required'
                 ];
             default:

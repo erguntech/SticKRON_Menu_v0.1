@@ -75,7 +75,7 @@
 
                         <div class="row mt-6">
                             <div class="col-12">
-                                <label for="input-campaign_main_image" class="required form-label">Kampanya Manşet Resmi</label> <a class="text-primary" data-fslightbox="lightbox-basic" href="{{ Storage::url("uploads/campaigns/".$digitalMenuCampaign->linked_client_id."/".$digitalMenuCampaign->id."/".$digitalMenuCampaign->id.".jpg") }}">(Mevcut Görsel Önizleme)</a>
+                                <label for="input-campaign_main_image" class="form-label">Kampanya Manşet Resmi</label> <a class="text-primary" data-fslightbox="lightbox-basic" href="{{ Storage::url("uploads/campaigns/".$digitalMenuCampaign->linked_client_id."/".$digitalMenuCampaign->id."/".$digitalMenuCampaign->id.".jpg") }}">(Mevcut Görsel Önizleme)</a>
                                 <input type="file" name="input-campaign_main_image" id="input-campaign_main_image" class="form-control @error('input-campaign_main_image') is-invalid error-input @enderror"/>
 
                                 @if ($errors->has('input-campaign_main_image'))
