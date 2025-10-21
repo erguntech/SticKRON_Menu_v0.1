@@ -233,14 +233,8 @@
     <div class="border-top border-color-transparent-dark-very-light pt-25px pb-25px">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-md-6 col-sm-6 fs-15 last-paragraph-no-margin text-center text-sm-start order-3 order-sm-2 order-md-1">
+                <div class="col-md-12 fs-15 last-paragraph-no-margin text-center order-3 order-sm-2 order-md-1">
                     <p>&COPY; Copyright {{ date('Y') }} <a href="digitalmenu.stickron.com" target="_blank" class="text-decoration-line-bottom text-dark-gray fw-600">Stickron Dijital Menu</a></p>
-                </div>
-
-                <div class="col-md-6 col-sm-6 elements-social social-icon-style-08 xs-mb-15px text-center text-sm-end order-2 order-sm-3 order-md-3">
-                    <ul class="small-icon dark d-inline-block">
-                        <li><a class="instagram" href="https://www.instagram.com/stickronsocial" target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
-                    </ul>
                 </div>
             </div>
         </div>
