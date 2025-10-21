@@ -123,14 +123,22 @@
                                     @endphp
                                     <div class="row justify-content-center">
                                         @foreach($chunks as $chunk)
-                                            <div class="col-lg-6 {{ $loop->first ? 'sm-mb-20px' : '' }}">
-                                                <ul class="pricing-table-style-12 {{ $loop->first ? 'pe-15px md-pe-0' : 'ps-15px md-ps-0' }}"
+                                            <div class="col-lg-12">
+                                                <ul class="pricing-table-style-12"
                                                     data-anime='{ "el": "childs", "rotateX": [-40, 0], "opacity": [0,1], "duration": 1200, "delay": 0, "staggervalue": 150, "easing": "easeOutQuad" }'>
-
                                                     @foreach($chunk as $content)
                                                         <li class="last-paragraph-no-margin d-flex">
-                                                            <img src="{{ asset('storage/uploads/products/'.$content->linked_client_id.'/'.$content->id.'/'.$content->id.'.jpg') }}"
-                                                                 class="rounded-circle" alt="" width="105" height="105">
+                                                            @php
+                                                                $imagePath = 'uploads/products/'.$content->linked_client_id.'/'.$content->id.'/'.$content->id.'.jpg';
+                                                            @endphp
+                                                            <img
+                                                                src="{{ Storage::disk('public')->exists($imagePath)
+                                                                ? asset('storage/'.$imagePath)
+                                                                : asset('assets/crafto/images/placeholder.jpg') }}"
+                                                                class="rounded-circle"
+                                                                alt=""
+                                                                width="105"
+                                                                height="105">
                                                             <div class="ms-30px xs-ms-0 flex-grow-1">
                                                                 <div class="d-flex align-items-center w-100 fs-18 mb-5px">
                                                                     <span class="fw-600 text-dark-gray">{{ $content->content_name }}</span>
