@@ -139,7 +139,7 @@
                                                                 alt=""
                                                                 width="75"
                                                                 height="75">
-                                                            <div class="ms-30px flex-grow-1">
+                                                            <div class="ms-20px flex-grow-1">
                                                                 <div class="d-flex align-items-center w-100 fs-18 mb-5px">
                                                                     <span class="fw-600 text-dark-gray">{{ $content->content_name }}</span>
                                                                     <div class="divider-style-03 divider-style-03-02 border-color-extra-medium-gray flex-grow-1 ms-20px me-20px"></div>
