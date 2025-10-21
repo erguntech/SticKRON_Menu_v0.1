@@ -234,7 +234,7 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-12 fs-15 last-paragraph-no-margin text-center order-3 order-sm-2 order-md-1">
-                    <p>&COPY; Copyright {{ date('Y') }} <a href="digitalmenu.stickron.com" target="_blank" class="text-decoration-line-bottom text-dark-gray fw-600">Stickron Dijital Menu</a></p>
+                    <p>&COPY; Copyright {{ date('Y') }} <a href="https://www.stickron.com" target="_blank" class="text-decoration-line-bottom text-dark-gray fw-600">Stickron Dijital Menu</a></p>
                 </div>
             </div>
         </div>
