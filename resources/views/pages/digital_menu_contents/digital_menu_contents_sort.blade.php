@@ -9,6 +9,9 @@
     <style>
         .handle {
             cursor: move;
+            touch-action: none;    /* Android’de scroll’un baskın gelmesini engeller */
+            -ms-touch-action: none;
+            user-select: none;
         }
     </style>
 @endsection
