@@ -8,7 +8,16 @@
 @section('PageCustomCSS')
     <style>
         .handle {
-            cursor: move;
+            touch-action: none;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+        .sortable-ghost {
+            opacity: 0.4;
+            background: #c8ebfb;
+        }
+        .sortable-drag {
+            opacity: 0.8;
         }
     </style>
 @endsection
@@ -78,7 +87,7 @@
 @endsection
 
 @section('PageVendorJS')
-    <script src="http://SortableJS.github.io/Sortable/Sortable.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
 @endsection
 
 @section('PageCustomJS')
@@ -91,10 +100,13 @@
                 });
             });
 
-            Sortable.create(sortList, {
-                handle: '.handle',
+            var handleList = document.getElementById('sortList');
+            var sortable = Sortable.create(handleList, {
+                handle: '.handle', // Sadece bu sınıfa sahip öğe ile sürüklenebilir
                 animation: 150,
-                onEnd: function (evt) {
+                ghostClass: 'sortable-ghost',
+                dragClass: 'sortable-drag',
+                onEnd: function(evt) {
                     updateOrder();
                 }
             });
