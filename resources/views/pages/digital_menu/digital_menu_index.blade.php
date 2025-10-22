@@ -195,6 +195,7 @@
                                 <div class="box-overlay bg-white z-index-minus-1"></div>
                                 <div>
                                     <div class="d-block fs-24 alt-font ls-minus-05px text-dark-gray">{{ $clientCampaign->campaign_name }}</div>
+                                    <div class="d-block fs-18 ls-minus-05px text-muted">{{ $clientCampaign->campaign_description }}</div>
                                     <span class="fs-26 alt-font ls-minus-1px text-dark-gray">
                                     <del class="me-10px text-red">
                                         {{ number_format($clientCampaign->campaign_standard_price, 2, ',', '.') }} TL
