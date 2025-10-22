@@ -10,6 +10,13 @@
         .handle {
             cursor: move;
         }
+        .sortable-ghost {
+            opacity: 0.4;
+            background: #c8ebfb;
+        }
+        .sortable-drag {
+            opacity: 0.8;
+        }
     </style>
 @endsection
 
@@ -55,10 +62,10 @@
                             @method('POST')
                             <div class="row" id="sortList">
                                 @foreach($digitalMenuContents as $digitalMenuContent)
-                                    <div class="handle sort-item alert alert-{{ ($digitalMenuContent->is_active) ? 'primary' : 'warning' }} d-flex align-items-center p-3" data-id="{{ $digitalMenuContent->id }}">
+                                    <div class=" sort-item alert alert-{{ ($digitalMenuContent->is_active) ? 'primary' : 'warning' }} d-flex align-items-center p-3" data-id="{{ $digitalMenuContent->id }}">
                                         <span class="position-badge badge badge-{{ ($digitalMenuContent->is_active) ? 'primary' : 'warning' }} me-2">1</span>
                                         {{ $digitalMenuContent->content_name }} | {{ $digitalMenuContent->content_description }}
-                                        <i class=" ki-solid ki-abstract-14 fs-3 text-warning" style="position: absolute; right: 10px;"></i>
+                                        <i class="handle ki-solid ki-abstract-14 fs-3 text-warning" style="position: absolute; right: 10px;"></i>
                                     </div>
                                 @endforeach
                             </div>
@@ -78,7 +85,7 @@
 @endsection
 
 @section('PageVendorJS')
-    <script src="http://SortableJS.github.io/Sortable/Sortable.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
 @endsection
 
 @section('PageCustomJS')
@@ -91,12 +98,12 @@
                 });
             });
 
-            Sortable.create(sortList, {
-                handle: '.handle',
+            var handleList = document.getElementById('sortList');
+            var sortable = Sortable.create(handleList, {
+                handle: '.handle', // Sadece bu sınıfa sahip öğe ile sürüklenebilir
                 animation: 150,
-                onEnd: function (evt) {
-                    updateOrder();
-                }
+                ghostClass: 'sortable-ghost',
+                dragClass: 'sortable-drag'
             });
 
             function updateOrder() {
