@@ -104,13 +104,16 @@
                 handle: '.handle', // Sadece bu sınıfa sahip öğe ile sürüklenebilir
                 animation: 150,
                 ghostClass: 'sortable-ghost',
-                dragClass: 'sortable-drag'
+                dragClass: 'sortable-drag',
+                onEnd: function(evt) {
+                    updateOrder();
+                }
             });
 
             function updateOrder() {
                 let order = [];
                 document.querySelectorAll('.sort-item').forEach((item, index) => {
-                    newPosition = index + 1;
+                    const newPosition = index + 1;
                     item.querySelector('.position-badge').textContent = newPosition;
                     order.push({
                         id: item.dataset.id,
