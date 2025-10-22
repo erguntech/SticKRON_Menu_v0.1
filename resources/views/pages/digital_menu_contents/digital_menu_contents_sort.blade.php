@@ -64,18 +64,14 @@
                             @method('POST')
                             <div class="row" id="sortList">
                                 @foreach($digitalMenuContents as $digitalMenuContent)
-                                    <<<<<<< HEAD
-                                    <div class=" sort-item alert alert-{{ ($digitalMenuContent->is_active) ? 'primary' : 'warning' }} d-flex align-items-center p-3" data-id="{{ $digitalMenuContent->id }}">
-                                        =======
-                                        <div class="sort-item alert alert-{{ ($digitalMenuContent->is_active) ? 'primary' : 'warning' }} d-flex align-items-center p-3" data-id="{{ $digitalMenuContent->id }}">
-                                            >>>>>>> 18ade48b20f52af65087b4bc7fb4ae2f9bf880c6
-                                            <span class="position-badge badge badge-{{ ($digitalMenuContent->is_active) ? 'primary' : 'warning' }} me-2">1</span>
-                                            {{ $digitalMenuContent->content_name }} | {{ $digitalMenuContent->content_description }}
-                                            <i class="handle ki-solid ki-abstract-14 fs-3 text-warning" style="position: absolute; right: 10px;"></i>
-                                        </div>
-                                        @endforeach
+                                    <div class="sort-item alert alert-{{ ($digitalMenuContent->is_active) ? 'primary' : 'warning' }} d-flex align-items-center p-3" data-id="{{ $digitalMenuContent->id }}">
+                                        <span class="position-badge badge badge-{{ ($digitalMenuContent->is_active) ? 'primary' : 'warning' }} me-2">1</span>
+                                        {{ $digitalMenuContent->content_name }} | {{ $digitalMenuContent->content_description }}
+                                        <i class="handle ki-solid ki-abstract-14 fs-3 text-warning" style="position: absolute; right: 10px;"></i>
                                     </div>
-                                    <input type="hidden" name="order" id="orderInput">
+                                @endforeach
+                            </div>
+                            <input type="hidden" name="order" id="orderInput">
                         </form>
                         <div class="separator border-2 my-10"></div>
                         <button type="submit" class="btn btn-warning btn-sm" form="editForm">
@@ -87,7 +83,6 @@
             @endif
         </div>
     </div>
-
 @endsection
 
 @section('PageVendorJS')
