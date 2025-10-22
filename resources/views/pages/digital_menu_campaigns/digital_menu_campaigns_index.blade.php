@@ -98,7 +98,7 @@
                 autoWidth: false,
                 responsive: false,
                 pageLength: 10,
-                searching: false,
+                searching: true,
                 scrollX: false,
                 lengthChange: false,
                 fnCreatedRow: function( nRow, aData, iDataIndex ) {
