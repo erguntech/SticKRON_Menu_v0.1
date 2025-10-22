@@ -98,7 +98,7 @@
                 autoWidth: false,
                 responsive: false,
                 pageLength: 10,
-                searching: false,
+                searching: true,
                 scrollX: false,
                 lengthChange: false,
                 fnCreatedRow: function( nRow, aData, iDataIndex ) {
@@ -157,6 +157,7 @@
             });
 
             $('#table-search').keyup(function(){
+                console.log('aaa');
                 dt.search($(this).val()).draw();
             });
         };

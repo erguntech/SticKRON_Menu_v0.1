@@ -21,10 +21,12 @@
     <link rel="stylesheet" href="{{ asset('assets/crafto/css/style.css') }}"/>
     <link rel="stylesheet" href="{{ asset('assets/crafto/css/responsive.css') }}"/>
     <link rel="stylesheet" href="{{ asset('assets/crafto/demos/restaurant/restaurant.css') }}" />
+    <link href="https://cdn.jsdelivr.net/npm/lightbox2@2.11.5/dist/css/lightbox.min.css" rel="stylesheet">
     <style>
         .page-layout{min-height:100vh;display:flex;flex-direction:column;}
         .page-layout>footer{margin-top:auto;position:static !important;}
     </style>
+
 </head>
 <body data-mobile-nav-trigger-alignment="right" data-mobile-nav-style="modern" data-mobile-nav-bg-color="#383632" class="custom-cursor">
 <!-- start cursor -->
@@ -131,14 +133,7 @@
                                                             @php
                                                                 $imagePath = 'uploads/products/'.$content->linked_client_id.'/'.$content->id.'/'.$content->id.'.jpg';
                                                             @endphp
-                                                            <img
-                                                                src="{{ Storage::disk('public')->exists($imagePath)
-                                                                ? asset('storage/'.$imagePath)
-                                                                : asset('assets/crafto/images/placeholder.jpg') }}"
-                                                                class="rounded-circle"
-                                                                alt=""
-                                                                width="75"
-                                                                height="75">
+                                                            <a href="{{ Storage::disk('public')->exists($imagePath) ? asset('storage/'.$imagePath) : asset('assets/crafto/images/placeholder.jpg') }}" data-lightbox="image-product" data-title="{{ $content->content_name }}"><img src="{{ Storage::disk('public')->exists($imagePath) ? asset('storage/'.$imagePath) : asset('assets/crafto/images/placeholder.jpg') }}" class="rounded-circle" alt="" width="75" height="75"></a>
                                                             <div class="ms-20px flex-grow-1">
                                                                 <div class="d-flex align-items-center w-100 fs-18 mb-5px">
                                                                     <span class="fw-600 text-dark-gray">{{ $content->content_name }}</span>
@@ -183,18 +178,19 @@
                         <h2 class="alt-font fw-400 text-dark-gray">Kampanyalar</h2>
                     </div>
                 </div>
-                <div class="row row-cols-1 row-cols-lg-3 row-cols-sm-2 justify-content-center" data-anime='{ "el": "childs", "translateY": [50, 0], "rotateY": [-30, 0], "opacity": [0,1], "duration": 600, "delay": 100, "staggervalue": 300, "easing": "easeOutQuad" }'>
 
+                <div class="row row-cols-1 row-cols-lg-3 row-cols-sm-2 justify-content-center" data-anime='{ "el": "childs", "translateY": [50, 0], "rotateY": [-30, 0], "opacity": [0,1], "duration": 600, "delay": 100, "staggervalue": 300, "easing": "easeOutQuad" }'>
                     @foreach($clientCampaigns as $clientCampaign)
                         <div class="col text-center md-mb-50px sm-mb-30px">
                             <!-- start services box style -->
                             <div class="services-box-style-04 last-paragraph-no-margin border-radius-4px overflow-hidden position-relative">
                                 <div class="mb-25px">
-                                    <img src="{{ asset(Storage::url("uploads/campaigns/{$clientCampaign->linked_client_id}/{$clientCampaign->id}/{$clientCampaign->id}.jpg")) }}" alt="" data-bottom-top="transform: rotate(15deg)" data-top-bottom="transform:rotate(-15deg)">
+                                    <a href="{{ asset(Storage::url("uploads/campaigns/{$clientCampaign->linked_client_id}/{$clientCampaign->id}/{$clientCampaign->id}.jpg")) }}" data-lightbox="image-campaign" data-title="{{ $clientCampaign->campaign_name }}"><img data-lightbox="image-1" data-title="My caption" src="{{ asset(Storage::url("uploads/campaigns/{$clientCampaign->linked_client_id}/{$clientCampaign->id}/{$clientCampaign->id}.jpg")) }}" alt="" data-bottom-top="transform: rotate(15deg)" data-top-bottom="transform:rotate(-15deg)"></a>
                                 </div>
                                 <div class="box-overlay bg-white z-index-minus-1"></div>
                                 <div>
                                     <div class="d-block fs-24 alt-font ls-minus-05px text-dark-gray">{{ $clientCampaign->campaign_name }}</div>
+                                    <div class="d-block fs-18 ls-minus-05px text-muted">{{ $clientCampaign->campaign_description }}</div>
                                     <span class="fs-26 alt-font ls-minus-1px text-dark-gray">
                                     <del class="me-10px text-red">
                                         {{ number_format($clientCampaign->campaign_standard_price, 2, ',', '.') }} TL
@@ -252,14 +248,25 @@
 <script type="text/javascript" src="{{ asset('assets/crafto/js/jquery.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/crafto/js/vendors.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/crafto/js/main.js') }}"></script>
+
+<script src="
+https://cdn.jsdelivr.net/npm/lightbox2@2.11.5/dist/js/lightbox.min.js
+"></script>
 <script>
-    document.addEventListener('shown.bs.tab', function (e) {
-        const selector = e.target.getAttribute('href'); // örn: "#tabIndex2"
+    lightbox.option({
+        'resizeDuration': 100,
+        'wrapAround': false
+    })
+</script>
+<script>
+
+document.addEventListener('shown.bs.tab', function (e) {
+        const selector = e.target.getAttribute('href');
         if (!selector) return;
         const $pane = $(selector);
         $pane.find('[data-anime]').each(function () {
-            $(this).trigger('appear');     // animasyonu başlat
-            $(this).addClass('appear');    // güvenlik için sınıfı da ekle
+            $(this).trigger('appear');
+            $(this).addClass('appear');
         });
     });
 </script>
