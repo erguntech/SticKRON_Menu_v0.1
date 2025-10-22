@@ -8,10 +8,10 @@
 @section('PageCustomCSS')
     <style>
         .handle {
-            cursor: move;
-            touch-action: none;    /* Android’de scroll’un baskın gelmesini engeller */
-            -ms-touch-action: none;
+            touch-action: none;      /* Android’de sayfa kaymasını engeller */
             user-select: none;
+            -webkit-user-select: none;
+            cursor: grab;
         }
     </style>
 @endsection
@@ -58,10 +58,10 @@
                             @method('POST')
                             <div class="row" id="sortList">
                                 @foreach($digitalMenuContents as $digitalMenuContent)
-                                    <div class="handle sort-item alert alert-{{ ($digitalMenuContent->is_active) ? 'primary' : 'warning' }} d-flex align-items-center p-3" data-id="{{ $digitalMenuContent->id }}">
+                                    <div class="sort-item alert alert-{{ ($digitalMenuContent->is_active) ? 'primary' : 'warning' }} d-flex align-items-center p-3" data-id="{{ $digitalMenuContent->id }}">
                                         <span class="position-badge badge badge-{{ ($digitalMenuContent->is_active) ? 'primary' : 'warning' }} me-2">1</span>
                                         {{ $digitalMenuContent->content_name }} | {{ $digitalMenuContent->content_description }}
-                                        <i class=" ki-solid ki-abstract-14 fs-3 text-warning" style="position: absolute; right: 10px;"></i>
+                                        <i class="handle ki-solid ki-abstract-14 fs-3 text-warning" style="position: absolute; right: 10px;"></i>
                                     </div>
                                 @endforeach
                             </div>
@@ -95,10 +95,22 @@
             });
 
             Sortable.create(sortList, {
-                handle: '.handle',
+                handle: '.handle',               // sadece handle’dan tutarak sürükleme
                 animation: 150,
+                delayOnTouchOnly: true,          // sadece dokunma (touch) olayında gecikme uygula
+                delay: 120,                      // Android’de yanlışlıkla scroll yerine drag olması için küçük gecikme
+                touchStartThreshold: 4,          // kaç piksel hareketten sonra drag sayılacak
+                forceFallback: true,             // HTML5 drag yerine fallback (mobilde daha tutarlı)
+                fallbackOnBody: true,            // clone body’e eklensin
+                fallbackTolerance: 3,            // küçük hareketleri tolere et
+
+                scroll: true,                    // sürüklerken scroll edebilir
+                bubbleScroll: true,
+                scrollSensitivity: 30,
+                scrollSpeed: 10,
+
                 onEnd: function (evt) {
-                    updateOrder();
+                    updateOrder();               // sıralama tamamlanınca çalışır
                 }
             });
 
