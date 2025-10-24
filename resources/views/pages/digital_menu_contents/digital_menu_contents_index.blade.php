@@ -89,29 +89,42 @@
         DataTable.type('html-num', 'detect', () => false);
         DataTable.type('html-num-fmt', 'detect', () => false);
 
-        function turkishToLower(str) {
-            var letters = { "İ":"i", "I":"ı", "Ş":"ş", "Ğ":"ğ", "Ü":"ü", "Ö":"ö", "Ç":"ç" };
-            str = str.replace(/([İIŞĞÜÇÖ])/g, function(letter){ return letters[letter]; });
-            return str.toLowerCase();
+        function trFold(str) {
+            if (!str) return '';
+            const map = {
+                'ç':'c','Ç':'c',
+                'ğ':'g','Ğ':'g',
+                'ı':'i','I':'i','İ':'i',
+                'ö':'o','Ö':'o',
+                'ş':'s','Ş':'s',
+                'ü':'u','Ü':'u'
+            };
+            return String(str).replace(/[çÇğĞıIİöÖşŞüÜ]/g, m => map[m]).toLowerCase();
         }
 
-        $.fn.dataTable.ext.type.search.string = function (data) {
-            return !data ?
-                '' :
-                typeof data === 'string' ?
-                    turkishToLower(data)
-                        .replace(/\n/g, ' ')
-                        .replace(/\r/g, '') :
-                    data;
-        };
+        // 2) DataTables arama tiplerini override (v2 ve v1 uyumlu)
+        (function(){
+            const ext = (window.DataTable && window.DataTable.ext) || ($.fn.dataTable && $.fn.dataTable.ext);
+            if (!ext || !ext.type) return;
 
-        $.fn.dataTable.ext.type.search.html = function (data) {
-            return !data ?
-                '' :
-                typeof data === 'string' ?
-                    turkishToLower(data.replace(/<.*?>/g, '')) :
-                    data;
-        };
+            ext.type.search.string = function (data) {
+                return !data ? '' : trFold(data).replace(/\n/g, ' ').replace(/\r/g, '');
+            };
+
+            ext.type.search.html = function (data) {
+                return !data ? '' : trFold(String(data).replace(/<.*?>/g, ''));
+            };
+
+            // (İsteğe bağlı) Eğer columnDefs'te type:'turkish' kullanmak istiyorsan:
+            ext.type.search.turkish = function (data) {
+                return !data ? '' : trFold(data);
+            };
+        })();
+
+        // 3) Input'u da aynı şekilde normalize ederek ara
+        $('#table-search').on('keyup', function(){
+            dt.search(trFold(this.value)).draw();
+        });
 
         var initDatatable = function () {
             dt = $("#datatable").DataTable({
@@ -148,7 +161,6 @@
                     { data: null },
                 ],
                 columnDefs: [
-                    { type: 'turkish', targets: [0,1] },
                     { targets : 0,
                         render : function (data, type, row) {
                             return '<span class="badge badge-square badge-light-warning"><strong>'+ data +'</strong></span>';
@@ -178,10 +190,6 @@
 
             dt.on('draw', function () {
                 KTMenu.createInstances();
-            });
-
-            $('#table-search').keyup(function(){
-                dt.search(turkishToLower($(this).val())).draw();
             });
         };
 
