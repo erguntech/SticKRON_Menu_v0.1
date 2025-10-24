@@ -89,6 +89,30 @@
         DataTable.type('html-num', 'detect', () => false);
         DataTable.type('html-num-fmt', 'detect', () => false);
 
+        function turkishToLower(str) {
+            var letters = { "İ":"i", "I":"ı", "Ş":"ş", "Ğ":"ğ", "Ü":"ü", "Ö":"ö", "Ç":"ç" };
+            str = str.replace(/([İIŞĞÜÇÖ])/g, function(letter){ return letters[letter]; });
+            return str.toLowerCase();
+        }
+
+        $.fn.dataTable.ext.type.search.string = function (data) {
+            return !data ?
+                '' :
+                typeof data === 'string' ?
+                    turkishToLower(data)
+                        .replace(/\n/g, ' ')
+                        .replace(/\r/g, '') :
+                    data;
+        };
+
+        $.fn.dataTable.ext.type.search.html = function (data) {
+            return !data ?
+                '' :
+                typeof data === 'string' ?
+                    turkishToLower(data.replace(/<.*?>/g, '')) :
+                    data;
+        };
+
         var initDatatable = function () {
             dt = $("#datatable").DataTable({
                 searchDelay: 10000,
@@ -157,7 +181,7 @@
             });
 
             $('#table-search').keyup(function(){
-                dt.search($(this).val()).draw();
+                dt.search(turkishToLower($(this).val())).draw();
             });
         };
 
