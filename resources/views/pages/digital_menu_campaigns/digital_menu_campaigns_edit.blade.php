@@ -75,7 +75,14 @@
 
                         <div class="row mt-6">
                             <div class="col-12">
-                                <label for="input-campaign_main_image" class="form-label">Kampanya Manşet Resmi</label> <a class="text-primary" data-fslightbox="lightbox-basic" href="{{ Storage::url("uploads/campaigns/".$digitalMenuCampaign->linked_client_id."/".$digitalMenuCampaign->id."/".$digitalMenuCampaign->id.".jpg") }}">(Mevcut Görsel Önizleme)</a>
+                                @php
+                                    $imagePath = "uploads/campaigns/".$digitalMenuCampaign->linked_client_id."/".$digitalMenuCampaign->id."/".$digitalMenuCampaign->id.".jpg";
+                                @endphp
+                                <label for="input-campaign_main_image" class="form-label">Kampanya Manşet Resmi</label>
+                                @if(Storage::disk('public')->exists($imagePath))
+                                    <a class="text-primary" data-fslightbox="lightbox-basic" href="{{ asset('storage/'.$imagePath) }}">(Mevcut Görsel Önizleme)</a>
+                                @endif
+
                                 <input type="file" name="input-campaign_main_image" id="input-campaign_main_image" class="form-control @error('input-campaign_main_image') is-invalid error-input @enderror"/>
 
                                 @if ($errors->has('input-campaign_main_image'))
