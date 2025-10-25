@@ -131,7 +131,7 @@
                                                     @foreach($chunk as $content)
                                                         <li class="last-paragraph-no-margin d-flex">
                                                             @php
-                                                                $imagePath = 'uploads/products/'.$content->linked_client_id.'/'.$content->id.'/'.$content->id.'.jpg';
+                                                                $imagePath = 'uploads/products/'.$content->linked_client_id.'/'.$content->id.'/'.$content->id.'.jpg?v='.time();
                                                             @endphp
                                                             <a href="{{ Storage::disk('public')->exists($imagePath) ? asset('storage/'.$imagePath) : asset('assets/crafto/images/placeholder.jpg') }}" data-lightbox="image-product" data-title="{{ $content->content_name }}"><img src="{{ Storage::disk('public')->exists($imagePath) ? asset('storage/'.$imagePath) : asset('assets/crafto/images/placeholder.jpg') }}" class="rounded-circle" alt="" width="75" height="75"></a>
                                                             <div class="ms-20px flex-grow-1">

@@ -86,7 +86,7 @@
                                 @endphp
                                 <label for="input-product_main_image" class="form-label">Ürün Manşet Resmi</label>
                                 @if(Storage::disk('public')->exists($imagePath))
-                                    <a class="text-primary" data-fslightbox="lightbox-basic" href="{{ asset('storage/'.$imagePath) }}">(Mevcut Görsel Önizleme)</a>
+                                    <a class="text-primary" data-fslightbox="lightbox-basic" href="{{ asset('storage/'.$imagePath) }}?v={{ time() }}">(Mevcut Görsel Önizleme)</a>
                                 @endif
 
                                 <input type="file" name="input-product_main_image" id="input-product_main_image" class="form-control @error('input-product_main_image') is-invalid error-input @enderror"/>
