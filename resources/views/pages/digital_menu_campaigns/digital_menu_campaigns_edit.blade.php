@@ -123,7 +123,7 @@
 @endsection
 
 @section('PageVendorJS')
-
+    <script src="{{ asset('assets/plugins/custom/fslightbox/fslightbox.bundle.js') }}"></script>
 @endsection
 
 @section('PageCustomJS')

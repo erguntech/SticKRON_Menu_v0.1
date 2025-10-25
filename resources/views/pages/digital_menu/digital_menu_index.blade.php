@@ -197,33 +197,8 @@
                         <div class="col text-center md-mb-50px sm-mb-30px">
                             <!-- start services box style -->
                             <div class="services-box-style-04 last-paragraph-no-margin border-radius-4px overflow-hidden position-relative">
-                                @php
-                                    $disk = \Illuminate\Support\Facades\Storage::disk('public');
-                                    $imagePath = "uploads/campaigns/{$clientCampaign->linked_client_id}/{$clientCampaign->id}/{$clientCampaign->id}.jpg";
-                                    $exists = $disk->exists($imagePath);
-
-                                    $baseSrc = $exists
-                                        ? asset('storage/'.$imagePath)
-                                        : asset('assets/crafto/images/placeholder.jpg');
-
-                                    // Dosya gerçekten güncellendiğinde versiyon değişsin
-                                    $ver = $exists ? $disk->lastModified($imagePath) : null;
-                                    $finalSrc = $exists ? "{$baseSrc}?v={$ver}" : $baseSrc;
-
-                                    // Lightbox grubu (aynı kampanyadaki birden fazla görseli gruplayacaksan aynı değeri kullan)
-                                    $lightboxGroup = "campaign-{$clientCampaign->id}";
-                                @endphp
                                 <div class="mb-25px">
-                                    <a href="{{ $finalSrc }}"
-                                       data-lightbox="{{ $lightboxGroup }}"
-                                       data-title="{{ $clientCampaign->campaign_name }}">
-                                        <img src="{{ $finalSrc }}"
-                                             alt="{{ $clientCampaign->campaign_name }}"
-                                             class="rounded"
-                                             width="500" height="500"
-                                             data-bottom-top="transform: rotate(15deg)"
-                                             data-top-bottom="transform:rotate(-15deg)">
-                                    </a>
+                                    <a href="{{ asset(Storage::url("uploads/campaigns/{$clientCampaign->linked_client_id}/{$clientCampaign->id}/{$clientCampaign->id}.jpg")) }}?v={{ time() }}" data-lightbox="image-campaign" data-title="{{ $clientCampaign->campaign_name }}"><img data-lightbox="image-1" data-title="My caption" src="{{ asset(Storage::url("uploads/campaigns/{$clientCampaign->linked_client_id}/{$clientCampaign->id}/{$clientCampaign->id}.jpg")) }}?v={{ time() }}" alt="" data-bottom-top="transform: rotate(15deg)" data-top-bottom="transform:rotate(-15deg)"></a>
                                 </div>
                                 <div class="box-overlay bg-white z-index-minus-1"></div>
                                 <div>
