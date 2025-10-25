@@ -102,7 +102,7 @@
 
             var handleList = document.getElementById('sortList');
             var sortable = Sortable.create(handleList, {
-                handle: '.handle', // Sadece bu sınıfa sahip öğe ile sürüklenebilir
+                handle: '.handle',
                 animation: 150,
                 ghostClass: 'sortable-ghost',
                 dragClass: 'sortable-drag',

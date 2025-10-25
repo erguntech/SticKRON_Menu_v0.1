@@ -102,7 +102,6 @@
             return String(str).replace(/[çÇğĞıIİöÖşŞüÜ]/g, m => map[m]).toLowerCase();
         }
 
-        // 2) DataTables arama tiplerini override (v2 ve v1 uyumlu)
         (function(){
             const ext = (window.DataTable && window.DataTable.ext) || ($.fn.dataTable && $.fn.dataTable.ext);
             if (!ext || !ext.type) return;
@@ -115,13 +114,11 @@
                 return !data ? '' : trFold(String(data).replace(/<.*?>/g, ''));
             };
 
-            // (İsteğe bağlı) Eğer columnDefs'te type:'turkish' kullanmak istiyorsan:
             ext.type.search.turkish = function (data) {
                 return !data ? '' : trFold(data);
             };
         })();
 
-        // 3) Input'u da aynı şekilde normalize ederek ara
         $('#table-search').on('keyup', function(){
             dt.search(trFold(this.value)).draw();
         });
