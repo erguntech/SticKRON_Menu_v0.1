@@ -185,7 +185,7 @@
                             <!-- start services box style -->
                             <div class="services-box-style-04 last-paragraph-no-margin border-radius-4px overflow-hidden position-relative">
                                 <div class="mb-25px">
-                                    <a href="{{ asset(Storage::url("uploads/campaigns/{$clientCampaign->linked_client_id}/{$clientCampaign->id}/{$clientCampaign->id}.jpg")) }}" data-lightbox="image-campaign" data-title="{{ $clientCampaign->campaign_name }}"><img data-lightbox="image-1" data-title="My caption" src="{{ asset(Storage::url("uploads/campaigns/{$clientCampaign->linked_client_id}/{$clientCampaign->id}/{$clientCampaign->id}.jpg")) }}" alt="" data-bottom-top="transform: rotate(15deg)" data-top-bottom="transform:rotate(-15deg)"></a>
+                                    <a href="{{ asset(Storage::url("uploads/campaigns/{$clientCampaign->linked_client_id}/{$clientCampaign->id}/{$clientCampaign->id}.jpg")) }}?v={{ time() }}" data-lightbox="image-campaign" data-title="{{ $clientCampaign->campaign_name }}"><img data-lightbox="image-1" data-title="My caption" src="{{ asset(Storage::url("uploads/campaigns/{$clientCampaign->linked_client_id}/{$clientCampaign->id}/{$clientCampaign->id}.jpg")) }}?v={{ time() }}" alt="" data-bottom-top="transform: rotate(15deg)" data-top-bottom="transform:rotate(-15deg)"></a>
                                 </div>
                                 <div class="box-overlay bg-white z-index-minus-1"></div>
                                 <div>
