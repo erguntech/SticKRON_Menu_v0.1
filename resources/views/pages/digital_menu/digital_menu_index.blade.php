@@ -131,10 +131,23 @@
                                                     @foreach($chunk as $content)
                                                         <li class="last-paragraph-no-margin d-flex">
                                                             @php
-                                                                $imagePath = 'uploads/products/'.$content->linked_client_id.'/'.$content->id.'/'.$content->id.'.jpg';
+                                                                $imagePath = "uploads/products/{$content->linked_client_id}/{$content->id}/{$content->id}.jpg";
+                                                                $disk = \Illuminate\Support\Facades\Storage::disk('public');
+                                                                $exists = $disk->exists($imagePath);
+
+                                                                // Ana kaynak (placeholder veya gerçek resim)
+                                                                $baseSrc = $exists ? asset('storage/'.$imagePath) : asset('assets/crafto/images/placeholder.jpg');
+
+                                                                // Versiyonlama: dosyanın son değişiklik zamanı (cache-busting için ideal)
+                                                                $ver = $exists ? $disk->lastModified($imagePath) : null;
+
+                                                                // Final URL'ler
+                                                                $imgSrc  = $exists ? "{$baseSrc}?v={$ver}" : $baseSrc;
+                                                                $hrefSrc = $imgSrc; // lightbox linki de aynı versiyonla gitsin
                                                             @endphp
-                                                            <a href="{{ Storage::disk('public')->exists($imagePath) ? asset('storage/'.$imagePath).'?v='.time() : asset('assets/crafto/images/placeholder.jpg') }}" data-lightbox="image-product" data-title="{{ $content->content_name }}"><img src="{{ Storage::disk('public')->exists($imagePath) ? asset('storage/'.$imagePath) : asset('assets/crafto/images/placeholder.jpg') }}" class="rounded-circle" alt="" width="75" height="75"></a>
-                                                            <div class="ms-20px flex-grow-1">
+                                                            <a href="{{ $hrefSrc }}" data-lightbox="image-product" data-title="{{ $content->content_name }}">
+                                                                <img src="{{ $imgSrc }}" class="rounded-circle" alt="{{ $content->content_name }}" width="75" height="75">
+                                                            </a>                                                            <div class="ms-20px flex-grow-1">
                                                                 <div class="d-flex align-items-center w-100 fs-18 mb-5px">
                                                                     <span class="fw-600 text-dark-gray">{{ $content->content_name }}</span>
                                                                     <div class="divider-style-03 divider-style-03-02 border-color-extra-medium-gray flex-grow-1 ms-20px me-20px"></div>
