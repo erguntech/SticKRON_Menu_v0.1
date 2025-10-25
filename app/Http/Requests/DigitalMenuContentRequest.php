@@ -17,7 +17,7 @@ class DigitalMenuContentRequest extends FormRequest
             case "POST":
                 return [
                     'input-content_name' => 'required|min:2|max:500',
-                    'input-content_price' => 'required|min:2|max:500',
+                    'input-content_price' => 'required|numeric|min:0|max:500000',
                     'input-digital_menu_category_id' => 'required',
                     'input-product_main_image' => 'nullable|image|mimes:jpg,jpeg,png|max:5120',
                     'input-is_active' => 'required',
@@ -25,7 +25,7 @@ class DigitalMenuContentRequest extends FormRequest
             case "PUT":
                 return [
                     'input-content_name' => 'required|min:2|max:500',
-                    'input-content_price' => 'required|min:2|max:500',
+                    'input-content_price' => 'required|numeric|min:0|max:500000',
                     'input-digital_menu_category_id' => 'required',
                     'input-product_main_image' => 'nullable|image|mimes:jpg,jpeg,png|max:5120',
                     'input-is_active' => 'required'

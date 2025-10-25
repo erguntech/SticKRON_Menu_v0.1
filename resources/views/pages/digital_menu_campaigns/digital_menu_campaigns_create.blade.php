@@ -48,7 +48,7 @@
                         <div class="row mt-6">
                             <div class="col-6">
                                 <label for="input-campaign_standard_price" class="required form-label">Kampamya Normal Fiyatı</label>
-                                <input type="text" name="input-campaign_standard_price" id="input-campaign_standard_price" class="form-control @error('input-campaign_standard_price') is-invalid error-input @enderror" placeholder="Kampamya Normal Fiyatı Giriniz" maxlength="50" value="{{ old('input-campaign_standard_price') }}"/>
+                                <input type="number" step="0.01" min="0" name="input-campaign_standard_price" id="input-campaign_standard_price" class="form-control @error('input-campaign_standard_price') is-invalid error-input @enderror" placeholder="Kampamya Normal Fiyatı Giriniz" maxlength="50" value="{{ old('input-campaign_standard_price') }}"/>
                                 @if ($errors->has('input-campaign_standard_price'))
                                     <div class="invalid-feedback">
                                         @ {{ $errors->first('input-campaign_standard_price') }}
@@ -57,7 +57,7 @@
                             </div>
                             <div class="col-6">
                                 <label for="input-campaign_discounted_price" class="required form-label">Kampamya İndirimli Fiyatı</label>
-                                <input type="text" name="input-campaign_discounted_price" id="input-campaign_discounted_price" class="form-control @error('input-campaign_discounted_price') is-invalid error-input @enderror" placeholder="Kampamya İndirimli Fiyatı Giriniz" maxlength="50" value="{{ old('input-campaign_discounted_price') }}"/>
+                                <input type="number" step="0.01" min="0" name="input-campaign_discounted_price" id="input-campaign_discounted_price" class="form-control @error('input-campaign_discounted_price') is-invalid error-input @enderror" placeholder="Kampamya İndirimli Fiyatı Giriniz" maxlength="50" value="{{ old('input-campaign_discounted_price') }}"/>
                                 @if ($errors->has('input-campaign_discounted_price'))
                                     <div class="invalid-feedback">
                                         @ {{ $errors->first('input-campaign_discounted_price') }}

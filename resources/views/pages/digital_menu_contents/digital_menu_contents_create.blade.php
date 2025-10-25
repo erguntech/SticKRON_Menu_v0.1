@@ -46,7 +46,7 @@
                             </div>
                             <div class="col-4">
                                 <label for="input-content_price" class="required form-label">Ürün Fiyatı</label>
-                                <input type="text" name="input-content_price" id="input-content_price" class="form-control @error('input-content_price') is-invalid error-input @enderror" placeholder="Ürün Fiyatı Giriniz" maxlength="50" value="{{ old('input-content_price') }}"/>
+                                <input type="number" step="0.01" min="0" name="input-content_price" id="input-content_price" class="form-control @error('input-content_price') is-invalid error-input @enderror" placeholder="Ürün Fiyatı Giriniz" maxlength="50" value="{{ old('input-content_price') }}"/>
                                 @if ($errors->has('input-content_price'))
                                     <div class="invalid-feedback">
                                         @ {{ $errors->first('input-content_price') }}

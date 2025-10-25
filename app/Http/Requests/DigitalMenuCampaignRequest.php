@@ -17,16 +17,16 @@ class DigitalMenuCampaignRequest extends FormRequest
             case "POST":
                 return [
                     'input-campaign_name' => 'required|min:2|max:500',
-                    'input-campaign_standard_price' => 'required|min:2|max:500',
-                    'input-campaign_discounted_price' => 'required|min:2|max:500',
+                    'input-campaign_standard_price' => 'required|numeric|min:0|max:500000',
+                    'input-campaign_discounted_price' => 'required|numeric|min:0|max:500000',
                     'input-campaign_main_image' => 'nullable|image|mimes:jpg,jpeg,png|max:5120',
                     'input-is_active' => 'required',
                 ];
             case "PUT":
                 return [
                     'input-campaign_name' => 'required|min:2|max:500',
-                    'input-campaign_standard_price' => 'required|min:2|max:500',
-                    'input-campaign_discounted_price' => 'required|min:2|max:500',
+                    'input-campaign_standard_price' => 'required|numeric|min:0|max:500000',
+                    'input-campaign_discounted_price' => 'required|numeric|min:0|max:500000',
                     'input-campaign_main_image' => 'nullable|image|mimes:jpg,jpeg,png|max:5120',
                     'input-is_active' => 'required'
                 ];
