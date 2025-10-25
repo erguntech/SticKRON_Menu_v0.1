@@ -43,7 +43,7 @@
                     @include('components.alert', $data = ['alert_type' => session('result'), 'alert_title' => session('title'), 'alert_content' => session('content')])
                 </div>
             @endif
-            @if (count($digitalMenuCategories) < 1)
+            @if (count($digitalMenuCampaigns) < 1)
                 <div class="alert alert-info d-flex align-items-center p-5 mt-4">
                     <i class="ki-duotone ki-shield-tick fs-2hx text-info me-4"><span class="path1"></span><span class="path2"></span></i>
                     <div class="d-flex flex-column">
