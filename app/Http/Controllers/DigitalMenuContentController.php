@@ -127,17 +127,32 @@ class DigitalMenuContentController extends Controller
         $digitalMenuContent->save();
 
         if ($request->hasFile('input-product_main_image')) {
-            $img = Image::read($request->file('input-product_main_image'))
-                ->orient()                          // EXIF’e göre doğru döndür
-                ->cover(500, 500, position: 'center');  // merkeze göre kırpıp 500x500 yap
+            $clientId = Auth::user()->linkedClient->id;
+            $contentId = $digitalMenuContent->id;
+            $path = "uploads/products/{$clientId}/{$contentId}";
+            $fileName = "{$contentId}.jpg";
+            $filePath = "{$path}/{$fileName}";
 
-            $path = 'uploads/products/'.Auth::user()->linkedClient->id.'/'.$digitalMenuContent->id;
+            // Klasörü oluştur (varsa dokunmaz)
             Storage::disk('public')->makeDirectory($path);
+
+            // Eski dosya varsa sil
+            if (Storage::disk('public')->exists($filePath)) {
+                Storage::disk('public')->delete($filePath);
+            }
+
+            // Yeni dosyayı hazırla
+            $img = Image::read($request->file('input-product_main_image'))
+                ->orient()
+                ->cover(500, 500, position: 'center');
+
+            // Yeni dosyayı kaydet
             Storage::disk('public')->put(
-                $path.'/'.$digitalMenuContent->id.'.jpg',
+                $filePath,
                 $img->encode(new JpegEncoder(quality: 100))
             );
         }
+
 
         return redirect()->route('DigitalMenuContents.Edit', $id)
             ->with('result','warning')
