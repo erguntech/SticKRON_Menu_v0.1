@@ -126,6 +126,15 @@
             dt.search(trFold(this.value)).draw();
         });
 
+        function numberFormat(number, decimals = 2, dec_point = ',', thousands_sep = '.') {
+            number = parseFloat(number);
+            if (isNaN(number)) return '0,00';
+            const fixed = number.toFixed(decimals);
+            const parts = fixed.split('.');
+            parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, thousands_sep);
+            return parts.join(dec_point);
+        }
+
         var initDatatable = function () {
             dt = $("#datatable").DataTable({
                 searchDelay: 10000,
@@ -164,6 +173,12 @@
                     { targets : 0,
                         render : function (data, type, row) {
                             return '<span class="badge badge-square badge-light-warning"><strong>'+ data +'</strong></span>';
+                        }
+                    },
+                    { targets: 3,
+                        render: function (data, type, row) {
+                            const formatted = numberFormat(data, 2, ',', '.');
+                            return '<span class="badge badge-square badge-light-warning"><strong>' + formatted + ' TL</strong></span>';
                         }
                     },
                     { targets: -1,
