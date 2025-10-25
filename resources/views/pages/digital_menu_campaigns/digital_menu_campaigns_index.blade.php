@@ -179,9 +179,6 @@
                     { className: "dt-settings", "targets": [ -1 ] },
                 ],
                 drawCallback : function() {
-                    if ($('#datatable tr').length < 10) {
-                        $('.dt-paging').hide();
-                    }
                     processInfo(this.api().page.info());
                 },
             });

@@ -134,7 +134,7 @@
                 order: [[0, 'asc']],
                 autoWidth: false,
                 responsive: false,
-                pageLength: 10,
+                pageLength: 5,
                 searching: true,
                 scrollX: false,
                 lengthChange: false,
@@ -179,9 +179,6 @@
                     { className: "dt-settings", "targets": [ -1 ] },
                 ],
                 drawCallback : function() {
-                    if ($('#datatable tr').length < 10) {
-                        $('.dt-paging').hide();
-                    }
                     processInfo(this.api().page.info());
                 },
             });
